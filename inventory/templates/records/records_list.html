@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block actions %}
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="add">Dodaj rekordy</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+{% if records %}
+<table id="cars">
+
+        <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">numer kolejny przychodu</th>
+                    <th scope="col">numer kolejny rozchodu</th>
+                    <th scope="col">data przychodu względnie rozchodu</th>
+                    <th scope="col">symbol i numer dowodu</th>
+                    <th scope="col">number fabryczny przedmiotu (obiektu)</th>
+                    <th scope="col">nazwa przedmiotu (obiektu),jego opis i stan</th>
+                    <th scope="col">cena jednostkowa</th>
+                    <th scope="col">ilość przychodu</th>
+                    <th scope="col">ilość rozchodu</th>
+                    <th scope="col">stan</th>
+                    <th scope="col">wartość przychodu</th>
+                    <th scope="col">wartość rozchodu</th>
+                    <th scope="col">wartość stanu</th>
+                    <th scope="col">przeciwstawny numer kolejny</th>
+                    <th scope="col">UWAGI(co do miejsca znajdowana się przedmiotu i inne)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for record in records %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ record.in_number }}</td>
+                        <td>{{ record.out_number }}</td>
+                        <td>{{ record.in_date }}</td>
+                        <td>{{ record.symbol_and_doc_number }}</td>
+                        <td>{{ record.stock_item_number }}</td>
+                        <td>{{ record.item_name_description_state }}</td>
+                        <td>{{ record.item_price }}</td>
+                        <td>{{ record.number_of_incoming }}</td>
+                        <td>{{ record.number_of_outgoing }}</td>
+                        <td>{{ record.number_result }}</td>
+                        <td>{{ record.incoming_value }}</td>
+                        <td>{{ record.outgoing_value }}</td>
+                        <td>{{ record.value_result }}</td>
+                        <td>{{ record.next_number }}</td>
+                        <td>{{ record.additionals }}</td>
+                        <td><a href="{% url 'record_edit' pk=record.id %}">edytuj</a></td>
+                        <td><a href="{% url 'record_delete' pk=record.id %}">
+                            usuń
+                        </a>
+                        </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+    
+</table>
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="/records?page={{ page_obj.previous_page_number }}">poprzednia strona</a>
+            {% endif %}
+            <span class="page-current">
+                Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="/records?page={{ page_obj.next_page_number }}">następna strona</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+{% else %}
+<h3></h3>
+<p>Brak rekordów :(</p>
+{% endif %}
+{% endblock %}
