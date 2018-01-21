@@ -10,21 +10,12 @@ class Record(models.Model):
     stock_item_number = models.PositiveIntegerField(blank=True, null=True, verbose_name='Numer fabryczny przedmiotu (obiektu)')
     item_name_description_state = models.TextField(blank=True, null=True, verbose_name='Nazwa przedmiotu (obiektu) jego opis i stan')
     item_price = models.FloatField(blank=True, null=True, verbose_name='Cena jednostkowa')
-<<<<<<< HEAD
     number_of_incoming = models.PositiveIntegerField(blank=True, default=1, verbose_name='Ilość przychodu')
     number_of_outgoing = models.PositiveIntegerField(blank=True, default=1, verbose_name='Ilość rozchodu')
     number_result = models.IntegerField(blank=True, default=0, verbose_name='Stan Ilości')
     incoming_value = models.FloatField(blank=True, max_length=255, default='1', verbose_name='Wartość przychodu')
     outgoing_value = models.FloatField(blank=True, max_length=255, default='1', verbose_name='Wartość rozchodu')
     value_result = models.FloatField(blank=True, max_length=255, default='0', verbose_name='Stan Wartości')
-=======
-    number_of_incoming = models.PositiveIntegerField(blank=True, null=True, default=1, verbose_name='Ilość przychodu')
-    number_of_outgoing = models.PositiveIntegerField(blank=True, null=True, default=1, verbose_name='Ilość rozchodu')
-    number_result = models.IntegerField(blank=True, null=True, default=0, verbose_name='Stan Ilości')
-    incoming_value = models.CharField(blank=True, max_length=255, default='1', verbose_name='Wartość przychodu')
-    outgoing_value = models.CharField(blank=True, max_length=255, default='1', verbose_name='Wartość rozchodu')
-    value_result = models.CharField(blank=True, max_length=255, default='0', verbose_name='Stan Wartości')
->>>>>>> 0d767704defd996347f24f576fb1c103dd62fa2a
     next_number = models.IntegerField(blank=True, null=True, verbose_name='Przeciwstawny numer kolejny')
     additionals = models.TextField(blank=True, null=True, verbose_name='UWAGI (co do miejsca znajdowania sie przedmiotu i inne)')
 

@@ -124,10 +124,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
 LOGIN_REDIRECT_URL = '/records'
 LOGIN_URL = '/login'
-=======
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login'
->>>>>>> 0d767704defd996347f24f576fb1c103dd62fa2a
