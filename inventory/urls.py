@@ -28,7 +28,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(template_name='authentication/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='authentication/login.html'), name='logout'),
+<<<<<<< HEAD
     path('report/', ReportView.as_view(template_name='records/summary.html'), name='report'),
+=======
+>>>>>>> 0d767704defd996347f24f576fb1c103dd62fa2a
     path('', HomeView.as_view(), name='home'),
     path('records/', RecordsView.as_view(), name='records'),
     path('records/add', RecordsAddView.as_view(), name='record_add'),
