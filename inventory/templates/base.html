@@ -29,20 +29,21 @@
 
                 <ul class="list-unstyled components">
                     <li>
-                        <a href="{% url 'home' %}">Strona główna</a>
-                    </li>
-                    <li>
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Wybierz inwentarz</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li><a href="{% url 'records'%}">Inwentarz przedmiotów</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="{% url 'report' %}">Zestawienia</a>
+                    </li>
                 </ul>
                 <ul class='list-unstyled'>
                     <li>
-                        <a href="#">Wyloguj się</a>
+                        <a href="{% url 'logout' %}">Wyloguj się</a>
                     </li>
                 </ul>
+                <footer style='position:absolute; bottom:0'>Copyright Zespół Szkół w Sułowie</footer>
             </nav>
 
             <!-- Page Content Holder -->

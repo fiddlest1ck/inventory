@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load summary %}
+{% block content %}
+<div class='container'>
+  <div class='row'>
+  <form method="get">
+    <div class="well"> 
+        <div class="row">
+          <div class="col-md-2">
+            <h3>Symbol i numer dowodu</h3>
+            {% render_field filter.form.symbol_and_doc_number class="form-control" %}
+          </div>
+          <div class='col-6 col-md-4'>
+            <h2>Przychód</h2>
+          
+            <div class='col'>
+              <p> Rok wcześniejszy niż</p>
+              {% render_field filter.form.in_date__year__lt class="form-control" %}
+            </div>
+            <div class='col'>
+              <p> Miesiąc wcześniejszy niż </p>
+              {% render_field filter.form.in_date__month__lt class="form-control" %}
+            </div>
+            <div class="col">
+              <p> Rok późniejszy niż </p>
+              {% render_field filter.form.in_date__year__gt class="form-control" %}
+            </div>
+            <div class="col">
+              <p> Miesiąc późniejszy niż</p>
+              {% render_field filter.form.in_date__month__gt class="form-control" %}
+            </div>
+          </div>
+          <div class='col-6 col-md-4'>
+            <h2>Rozchód</h2>
+              <div class='col'>
+              <p> Rok późniejszy niż</p>
+                {% render_field filter.form.out_date__year__gt class="form-control" %}
+              </div>
+              <div class="col">
+                <p> Miesiąc późniejszy niż </p>
+                {% render_field filter.form.out_date__month__gt class="form-control" %}
+              </div>
+              <div class="col">
+                <p> Rok wcześniejszy niż </p>
+                {% render_field filter.form.out_date__year__lt class="form-control" %}
+              </div>
+              <div class="col">
+                <p> Miesiąc wcześniejszy niż </p>
+                {% render_field filter.form.out_date__month__lt class="form-control" %}
+              </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span> Wyszukaj
+      </button>
+      <button type="submit" name='excel' value='excel' class="btn btn-primary">Wyeksportuj tabelę</button>
+      </div>
+  </form>
+  <table class="table table-stripped">
+    <h2>Stan ogólny</h2>
+    <thead>
+      <tr>
+        <th scope="col">Stan ilości</th>
+        <th scope="col">Stan Wartości</th>
+        <th scope="col">Wartość przychodu</th>
+        <th scope="col">Wartość rozchodu</th>
+        <th scope="col">Cena jednostkowa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{filter.qs | number_result}}</td>
+        <td>{{filter.qs | value_result}}</td>
+        <td>{{filter.qs | incoming_value}}</td>
+        <td>{{filter.qs | outgoing_value}}</td>
+        <td>{{filter.qs | item_price}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class='row'>
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">numer kolejny przychodu</th>
+        <th scope="col">numer kolejny rozchodu</th>
+        <th scope="col">data przychodu</th>
+        <th scope="col">data rozchodu</th>
+        <th scope="col">symbol i numer dowodu</th>
+        <th scope="col">number fabryczny przedmiotu (obiektu)</th>
+        <th scope="col">nazwa przedmiotu (obiektu),jego opis i stan</th>
+        <th scope="col">cena jednostkowa</th>
+        <th scope="col">ilość przychodu</th>
+        <th scope="col">ilość rozchodu</th>
+        <th scope="col">stan</th>
+        <th scope="col">wartość przychodu</th>
+        <th scope="col">wartość rozchodu</th>
+        <th scope="col">wartość stanu</th>
+        <th scope="col">przeciwstawny numer kolejny</th>
+        <th scope="col">UWAGI(co do miejsca znajdowana się przedmiotu i inne)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in filter.qs %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ record.in_number }}</td>
+          <td>{{ record.out_number }}</td>
+          <td>{{ record.in_date }}</td>
+          <td>{{ record.out_date }}</td>
+          <td>{{ record.symbol_and_doc_number }}</td>
+          <td>{{ record.stock_item_number }}</td>
+          <td>{{ record.item_name_description_state }}</td>
+          <td>{{ record.item_price }}</td>
+          <td>{{ record.number_of_incoming }}</td>
+          <td>{{ record.number_of_outgoing }}</td>
+          <td>{{ record.number_result }}</td>
+          <td>{{ record.incoming_value }}</td>
+          <td>{{ record.outgoing_value }}</td>
+          <td>{{ record.value_result }}</td>
+          <td>{{ record.next_number }}</td>
+          <td>{{ record.additionals }}</td>
+          <td><a href="{% url 'record_edit' pk=record.id %}">edytuj</a></td>
+          <td><a href="{% url 'record_delete' pk=record.id %}">usuń</a></td>              
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">Brak rekordow do wyświetlenia</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}

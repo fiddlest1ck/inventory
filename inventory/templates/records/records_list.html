@@ -16,7 +16,8 @@
                     <th scope="col">#</th>
                     <th scope="col">numer kolejny przychodu</th>
                     <th scope="col">numer kolejny rozchodu</th>
-                    <th scope="col">data przychodu względnie rozchodu</th>
+                    <th scope="col">data przychodu</th>
+                    <th scope="col">data rozchodu</th>
                     <th scope="col">symbol i numer dowodu</th>
                     <th scope="col">number fabryczny przedmiotu (obiektu)</th>
                     <th scope="col">nazwa przedmiotu (obiektu),jego opis i stan</th>
@@ -38,6 +39,7 @@
                         <td>{{ record.in_number }}</td>
                         <td>{{ record.out_number }}</td>
                         <td>{{ record.in_date }}</td>
+                        <td>{{ record.out_date }}</td>
                         <td>{{ record.symbol_and_doc_number }}</td>
                         <td>{{ record.stock_item_number }}</td>
                         <td>{{ record.item_name_description_state }}</td>
